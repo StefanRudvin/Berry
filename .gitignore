@@ -1,1 +1,9 @@
+api_keys.py
 /api_keys.py
+/.AppleDouble/*
+./AppleDouble/*
+*.pyc
+.DS_Store
+berry.mp3
+components/.AppleDouble/*
+/components/.AppleDouble/*

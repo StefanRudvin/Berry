@@ -20,7 +20,7 @@ def getRequestJSON(url):
     return response.json()
 
 
-def getNewsString():
+def getString():
 
     url = baseUrl + '?source=' + source + '&apiKey=' + api.newsApiKey
 

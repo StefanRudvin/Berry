@@ -1,13 +1,15 @@
-import requests
+import requests, json
 
-url = "http://api.fixer.io/latest?symbols=GBP,EUR"
+currencies = ['GBP', 'EURO']
 
-def getCurrencyString():
-    return "The euro to pound currency rate is {}.".format(parseCurrency())
+url = "http://api.fixer.io/latest?symbols={},{}".format(currencies[0], currencies[1])
+
+def getString():
+    return "The {} to {} currency rate is {}.".format(currencies[0], currencies[1], parseCurrency())
 
 def parseCurrency():
     data = getRequestJSON(url)
-    gbpRate = round(data['rates']['GBP'], 3)
+    gbpRate = round(data['rates'][currencies[0]], 3)
     return (1-gbpRate) + 1;
 
 

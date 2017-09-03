@@ -16,7 +16,7 @@ CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'Google Calendar API Python Quickstart'
 
 
-def getCalendarString():
+def getString():
     events = main()
 
     if not events:

@@ -1,5 +1,5 @@
 from gtts import gTTS
-import os, berrySetup, datetime, argparse, sys
+import os, datetime, argparse, sys
 
 import components.berryCalendar as bCalendar
 import components.berryCurrency as bCurrency
@@ -20,12 +20,11 @@ def main():
     tts.save("berry.mp3")
     os.system("mpg321 berry.mp3")
 
-
 def createMessage(args):
-    calendarString = bCalendar.getCalendarString()       if args.cal else ""
-    currencyString = bCurrency.getCurrencyString()       if args.cur else ""
+    calendarString = bCalendar.getString()        if args.cal else ""
+    currencyString = bCurrency.getString()        if args.cur else ""
     weatherString  = bWeather.getString(location) if args.w   else ""
-    newsString     = bNews.getNewsString()               if args.n   else ""
+    newsString     = bNews.getString()            if args.n   else ""
 
     welcomeString = createWelcomeString()
 
@@ -35,7 +34,7 @@ def createMessage(args):
     return message
 
 def createWelcomeString():
-    return welcome() + berrySetup.name + ". "
+    return welcome() + name + ". "
 
 def welcome():
     currentHour = datetime.datetime.now().hour
