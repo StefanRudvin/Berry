@@ -6,9 +6,9 @@ import components.berryCurrency as bCurrency
 import components.berryWeather  as bWeather
 import components.berryNews     as bNews
 
-name                 = 'Stefan'
-location             = "Espoo, fi"
-berryWeatherTempUnit = 'celsius'
+NAME                 = 'Stefan'
+LOCATION             = "Espoo, fi"
+#TEMPERATURE_UNIT    = 'celsius'
 
 def main():
     args = parseArguments()
@@ -23,7 +23,7 @@ def main():
 def createMessage(args):
     calendarString = bCalendar.getString()        if args.cal else ""
     currencyString = bCurrency.getString()        if args.cur else ""
-    weatherString  = bWeather.getString(location) if args.w   else ""
+    weatherString  = bWeather.getString(LOCATION) if args.w   else ""
     newsString     = bNews.getString()            if args.n   else ""
 
     welcomeString = createWelcomeString()
@@ -34,7 +34,7 @@ def createMessage(args):
     return message
 
 def createWelcomeString():
-    return welcome() + name + ". "
+    return welcome() + NAME + ". "
 
 def welcome():
     currentHour = datetime.datetime.now().hour
@@ -50,10 +50,10 @@ def welcome():
 
 def parseArguments():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--cur", help="enable Currency")
-    parser.add_argument("--cal", help="enable Calendar")
-    parser.add_argument("--w", help="Enable Weather")
-    parser.add_argument("--n", help="Enable News")
+    parser.add_argument("--cur", help="Enable Currency", action="store_true")
+    parser.add_argument("--cal", help="Enable Calendar", action="store_true")
+    parser.add_argument("--w",   help="Enable Weather" , action="store_true")
+    parser.add_argument("--n",   help="Enable News"    , action="store_true")
     return parser.parse_args()
 
 

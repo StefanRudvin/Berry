@@ -4,8 +4,8 @@
 
 ## Every 5 minutes check the newest event on google calendar.
 
-# If
+def main():
+
 
 if __name__ == "__main__":
-    parseArguments()
     main()
