@@ -1,4 +1,3 @@
-
 from __future__ import print_function
 import httplib2
 import os
@@ -9,6 +8,8 @@ from oauth2client import tools
 from oauth2client.file import Storage
 
 import datetime
+
+# https://developers.google.com/google-apps/calendar/quickstart/python
 
 try:
     import argparse

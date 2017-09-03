@@ -1,11 +1,9 @@
-import requests
+import requests, api_keys
 import json
 
 # From https://newsapi.org
 
 # https://newsapi.org/v1/articles?source=techcrunch&apiKey=db597713532b42f8a87a98487954b034
-
-apiKey = "db597713532b42f8a87a98487954b034"
 
 baseUrl = "https://newsapi.org/v1/articles"
 
@@ -19,14 +17,11 @@ def getRequestJSON(url):
 
 def getNewsString():
 
-    url = baseUrl + '?source=' + source + '&apiKey=' + apiKey
+    url = baseUrl + '?source=' + source + '&apiKey=' + newsApiKey
 
     responseJSON = getRequestJSON(url)
 
-    #print responseJSON
-
     articles = responseJSON['articles']
-
 
     headlines = ""
 
@@ -37,4 +32,3 @@ def getNewsString():
     message = "Here are the latest titles from BBC News: {} . That is all for the news today. ".format(headlines.encode('ascii', 'ignore').decode('ascii'))
 
     return message
-
