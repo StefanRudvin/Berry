@@ -1,11 +1,13 @@
-import pyowm, api_keys, setup
+import pyowm, os, sys, inspect
+currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parentdir = os.path.dirname(currentdir)
+sys.path.insert(0,parentdir)
 
-def init():
-    owm = pyowm.OWM(openWeatherMapApiKey)
+import api_keys as api
 
-def getWeatherString():
+def getString(location):
 
-    weatherAr = getCurrentWeather();
+    weatherAr = getCurrentWeather(location);
 
     windDirection = int(round(weatherAr['wind'][u'deg']))
     currentTemp   = int(round(weatherAr['temperature']['temp']))
@@ -16,8 +18,9 @@ def getWeatherString():
 
     return "Today is going to be a wicked day with the current temperature at {} degrees, humidity at {} percent and windspeed at {} meters per second.".format(currentTemp, humidity, windSpeed)
 
-def getCurrentWeather():
-    observation = owm.weather_at_place(berryWeatherLocation)
+def getCurrentWeather(location):
+    owm = pyowm.OWM(api.openWeatherMapApiKey)
+    observation = owm.weather_at_place(location)
     w = observation.get_weather() # <Weather - reference time=2013-12-18 09:20,
                                   # status=Clouds>
 

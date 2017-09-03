@@ -9,12 +9,6 @@ from oauth2client.file import Storage
 
 import datetime
 
-try:
-    import argparse
-    flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
-except ImportError:
-    flags = None
-
 # If modifying these scopes, delete your previously saved credentials
 # at ~/.credentials/calendar-python-quickstart.json
 SCOPES = 'https://www.googleapis.com/auth/calendar.readonly'
@@ -28,7 +22,9 @@ def getCalendarString():
     if not events:
         return "You have no upcoming calendar events today."
 
-    message = "You have {} events coming up today. ".format(len(events))
+    plural = "s" if (len(events) > 1) else ""
+
+    message = "You have {} event{} coming up today. ".format(len(events), plural)
 
     for event in events:
         start = event['start'].get('dateTime', event['start'].get('date'))

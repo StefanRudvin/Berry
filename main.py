@@ -1,13 +1,14 @@
 from gtts import gTTS
-import os, berrySetup, datetime, argparse
+import os, berrySetup, datetime, argparse, sys
 
-def parseArguments():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--cur", help="enable Currency")
-    parser.add_argument("--cal", help="enable Calendar")
-    parser.add_argument("--w", help="Enable Weather")
-    parser.add_argument("--n", help="Enable News")
-    return parser.parse_args()
+import components.berryCalendar as bCalendar
+import components.berryCurrency as bCurrency
+import components.berryWeather  as bWeather
+import components.berryNews     as bNews
+
+name                 = 'Stefan'
+location             = "Espoo, fi"
+berryWeatherTempUnit = 'celsius'
 
 def main():
     args = parseArguments()
@@ -21,10 +22,10 @@ def main():
 
 
 def createMessage(args):
-    calendarString = bCalendar.getCalendarString() if args.cal else ""
-    currencyString = bCurrency.getCurrencyString() if args.cur else ""
-    weatherString  = bWeather.getWeatherString()   if args.w   else ""
-    newsString     = bNews.getNewsString()         if args.n   else ""
+    calendarString = bCalendar.getCalendarString()       if args.cal else ""
+    currencyString = bCurrency.getCurrencyString()       if args.cur else ""
+    weatherString  = bWeather.getString(location) if args.w   else ""
+    newsString     = bNews.getNewsString()               if args.n   else ""
 
     welcomeString = createWelcomeString()
 
@@ -48,6 +49,15 @@ def welcome():
     else:
         return "Good morning "
 
+def parseArguments():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--cur", help="enable Currency")
+    parser.add_argument("--cal", help="enable Calendar")
+    parser.add_argument("--w", help="Enable Weather")
+    parser.add_argument("--n", help="Enable News")
+    return parser.parse_args()
+
 
 if __name__ == "__main__":
+    parseArguments()
     main()

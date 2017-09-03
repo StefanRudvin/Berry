@@ -1,5 +1,10 @@
-import requests, api_keys
-import json
+import requests, json, os,sys,inspect
+
+currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parentdir = os.path.dirname(currentdir)
+sys.path.insert(0,parentdir)
+
+import api_keys as api
 
 # From https://newsapi.org
 
@@ -17,7 +22,7 @@ def getRequestJSON(url):
 
 def getNewsString():
 
-    url = baseUrl + '?source=' + source + '&apiKey=' + newsApiKey
+    url = baseUrl + '?source=' + source + '&apiKey=' + api.newsApiKey
 
     responseJSON = getRequestJSON(url)
 
